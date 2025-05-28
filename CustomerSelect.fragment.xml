@@ -1,0 +1,44 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
+	xmlns:smartTable="sap.ui.comp.smarttable" xmlns:html="http://www.w3.org/1999/xhtml"
+	xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
+	<Dialog title="Selecionar Cliente" contentWidth="100%" contentHeight="100%">
+		<content>
+			<smartFilterBar:SmartFilterBar id="smartFilterBar1" entitySet="Customers" showFilterConfiguration="false" class="sapUiSizeCompact">
+				<smartFilterBar:controlConfiguration>
+					<smartFilterBar:ControlConfiguration key="Zcustomerid" visibleInAdvancedArea="true"/>
+					<smartFilterBar:ControlConfiguration key="Zcustomername" visibleInAdvancedArea="true"/>
+					<smartFilterBar:ControlConfiguration key="Zcidade" visibleInAdvancedArea="true"/>
+					<smartFilterBar:ControlConfiguration key="Zregio" visibleInAdvancedArea="true"/>
+					<smartFilterBar:ControlConfiguration key="Zcnpj" visibleInAdvancedArea="true"/>
+					<smartFilterBar:ControlConfiguration key="Zendereco" visibleInAdvancedArea="true"/>
+				</smartFilterBar:controlConfiguration>
+			</smartFilterBar:SmartFilterBar>
+			<smartTable:SmartTable id="smartTableREUnit" smartFilterId="Dialog--smartFilterBar1" tableType="Table" entitySet="Customers"
+				enableAutoBinding="true" enableAutoColumnWidth="false"
+				initiallyVisibleFields="CustomerID,Zcnpj,CustomerName,Zendereco,Zcidade,ZredeName,Zbairro,Zregio,SalesOrganization,DistributionChannel"
+				useTablePersonalisation="false" useExportToExcel="false">
+				<Table id="tableListCustomer" mode="SingleSelectMaster" selectionChange="handleSelectionChange">
+<!--					<columns>
+						<Column width="30%">
+							<customData>
+								<core:CustomData key="Zrede" value='\{"columnKey": "Zrede", "leadingProperty": "Zrede", "columnIndex": 5}'/>
+							</customData>
+							<Text text="TESTE"></Text>
+						</Column>
+					</columns>
+					<items>
+						<ColumnListItem>
+							<ObjectStatus text="{Zrede}"></ObjectStatus>
+						</ColumnListItem>
+					</items>-->
+				</Table>
+			</smartTable:SmartTable>
+		</content>
+		<beginButton>
+			<Button text="Selecionar" press="onAcceptCustomerSelect" type="Accept"/>
+		</beginButton>
+		<endButton>
+			<Button text="Cancelar" press="onCloseCustomerSelect" type="Back"/>
+		</endButton>
+	</Dialog>
+</core:FragmentDefinition>

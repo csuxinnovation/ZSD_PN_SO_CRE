@@ -1,0 +1,23 @@
+<core:FragmentDefinition
+   xmlns="sap.m"
+   xmlns:core="sap.ui.core" 
+   xmlns:u="sap.ui.unified"
+   controllerName="zcus.sd.pn.salesorder.create.view.S2">
+   <Dialog title="Carregar Pedido por Excel" class="sapUiSmallMarginBegin">
+       <content>            
+            <HBox>
+              <Button icon="sap-icon://excel-attachment" press="downloadModelo" text="Download Modelo Excel" class="sapUiSmallMargin"/>
+            </HBox>            
+            <HBox>
+                <u:FileUploader id="fileUploader" uploadOnChange="false" fileType="XLSX,xlsx" icon="sap-icon://excel-attachment"
+                placeholder="Arquivo" value="{modelTela>/filenameUpload}" change="_changeUploader" class="sapUiSmallMargin"/>
+            </HBox>
+        </content>
+        <beginButton>
+            <Button id="btUp" text="Carregar" press="uploadFileAction" type="Accept" icon="sap-icon://upload"/>
+        </beginButton>
+        <endButton>
+            <Button id="btCanc" text="Cancelar" press="closeDialog" type="Back"/>
+        </endButton>
+    </Dialog>
+</core:FragmentDefinition>

@@ -1,0 +1,58 @@
+<core:FragmentDefinition
+	xmlns:core="sap.ui.core"
+	xmlns="sap.m"
+	xmlns:l="sap.ui.layout"
+	controllerName="zcus.sd.pn.salesorder.create.view.S2">
+	<Dialog
+		id="ReturnMessage"
+		title="Mensagens"
+		contentWidth="500px"
+		contentHeight="500px"
+		resizable="false"	>
+		<content>		
+        <Table
+				items="{returnMessage>/}"
+			>
+            <columns>
+                <Column width="30%">
+                    <header>
+                        <Text text="Material" />
+                    </header>
+                </Column>
+                <Column width="10%">
+                    <header>
+                        <Text text="Tipo" />
+                    </header>
+                </Column>
+                <Column	width="60%">
+                    <header>
+                        <Text text="Mensagem" />
+                    </header>
+                </Column>
+            </columns>
+            <items>
+                <ColumnListItem>
+                    <cells>
+                        <Text text="{returnMessage>Material}"/>
+                        <core:Icon
+                            src="{returnMessage>Icon}"
+                            class="size2"
+                            color="{returnMessage>Color}">
+                            <core:layoutData>
+                                <FlexItemData growFactor="1" />
+                            </core:layoutData>
+                        </core:Icon>
+                        <Text text="{returnMessage>Mensagem}"/>		
+                    </cells>
+                </ColumnListItem>
+            </items>				
+	    </Table>
+		</content>		
+		<endButton>
+			<Button
+				text="Fechar"
+				press="pressFecharMessage"
+			/>
+		</endButton>		
+	</Dialog>	
+</core:FragmentDefinition>

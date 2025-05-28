@@ -1,0 +1,55 @@
+<!--
+
+    Copyright (C) 2009-2014 SAP SE or an SAP affiliate company. All rights reserved
+
+-->
+<core:View xmlns:core="sap.ui.core" xmlns="sap.m" controllerName="zcus.sd.pn.salesorder.create.view.S2">
+	<!--<Page class="sapUiFioriObjectPage">-->
+	<Page>
+		<customHeader>
+			<Bar>
+				<contentMiddle>
+					<Label id="SOC_MasterListHeaderTitle" textAlign="Center"></Label>
+				</contentMiddle>
+				<contentRight>
+					<Button id="changeCustomerButton" tap="changeInCustomerContext" icon="sap-icon://customer"/>
+				</contentRight>
+			</Bar>
+		</customHeader>
+		<Toolbar>
+			<Label id="SOC_MasterListHeader2" text="Cidade: " textAlign="Left"></Label>
+			<Label id="SOC_MasterListHeaderTitle2" textAlign="Left"></Label>
+		</Toolbar>
+		<Toolbar>
+			<Label id="SOC_MasterListHeader3" text="Estado: " textAlign="Left"></Label>
+			<Label id="SOC_MasterListHeaderTitle3" textAlign="Left"></Label>
+		</Toolbar>
+		<Toolbar>
+			<Button id="excelButton" icon="sap-icon://upload" press="onPressExcelButton" ariaLabelledBy="actionButtonLabel" text="Upload Excel" enabled="false"/>
+		</Toolbar>
+		<content>
+			<SegmentedButton id="selectToggleOrders" selectedButton="ORDERS_ID" width="100%">
+				<buttons>
+					<Button id="ORDERS_ID" press="onNavToSalesOrders" text="{i18n>ORDERS}" width="40%"></Button>
+					<Button id="PRODUCTS" press="onNavToProducts" text="{i18n>PRODUCTS}" width="40%"></Button>
+				</buttons>
+			</SegmentedButton>
+			<Toolbar id ="TbMaterialSearch1" visible="false">
+				<Label id="LbMaterialSearch1" class="soc-table-label-elem-align" text="Categoria:" visible="true">
+				</Label>
+				<Input id="MaterialSearch1" width="60%" class="soc-input-material-align" required="true" valueHelpOnly="true" showValueHelp="true" valueHelpRequest=".onValueHelpMaterialSearch1"></Input>
+			</Toolbar>	
+			<Toolbar id ="TbMaterialSearch2" visible="false">	
+				<Label id="LbMaterialSearch2" class="soc-table-label-elem-align" text="Brand:" visible="true">
+				</Label>
+				<Input id="MaterialSearch2" width="60%" class="soc-input-material-align" required="true" valueHelpOnly="true" showValueHelp="true" enabled="false" valueHelpRequest=".onValueHelpMaterialSearch2"></Input>
+			</Toolbar>	
+			<Toolbar id ="TbMaterialSearch3" visible="false">	
+				<Label id="LbMaterialSearch3" class="soc-table-label-elem-align" text="Size:" visible="true">
+				</Label>
+				<Input id="MaterialSearch3" width="60%" class="soc-input-material-align" required="true" valueHelpOnly="true" showValueHelp="true" enabled="false" valueHelpRequest=".onValueHelpMaterialSearch3"></Input>
+			</Toolbar>
+			<List id="list" mode="{device>/listMode}" select="_handleSelect" growing="true" growingThreshold="30" growingScrollToLoad="true"></List>
+		</content>
+	</Page>
+</core:View>

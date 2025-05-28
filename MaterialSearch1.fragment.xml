@@ -1,0 +1,38 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<TableSelectDialog
+		id="myDialog"
+		noDataText="Sem dados, verificar tabelas de configuração"
+		title="Selecionar Categoria"
+		search=".searchValueHelpMaterialSearch1"
+		confirm=".confirmValueHelpMaterialSearch1"
+		cancel=".handleClose"
+		items= "{MaterialSearch1>/}"
+		contentHeight="50%"
+		contentWidth="20%"
+        >
+		<columns>
+			<Column width="50%" visible="false">
+				<header>
+					<Text text="{i18n>Prodh}" />
+				</header>
+			</Column>
+			<Column width="50%">
+				<header>
+					<Text text="Categorias" />
+				</header>
+			</Column>
+		</columns>
+		<items>
+			<ColumnListItem
+				type="Navigation"
+				press=".onPress">
+				<cells>
+					<Text text="{MaterialSearch1>Prodh}"/>
+					<Text text="{MaterialSearch1>Text}"/>
+				</cells>
+			</ColumnListItem>
+		</items>
+	</TableSelectDialog>
+</core:FragmentDefinition>

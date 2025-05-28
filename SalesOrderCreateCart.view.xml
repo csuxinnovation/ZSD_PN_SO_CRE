@@ -1,0 +1,186 @@
+<!--
+
+    Copyright (C) 2009-2014 SAP SE or an SAP affiliate company. All rights reserved
+
+-->
+<sap.ui.core:View xmlns="sap.m" xmlns:f="sap.ui.layout.form" xmlns:sap.ui.layout="sap.ui.layout" xmlns:ui="sap.ca.ui"
+	xmlns:sap.ui.core="sap.ui.core" controllerName="zcus.sd.pn.salesorder.create.view.SalesOrderCreateCart">
+	<Page id="SOC_CREATE_CART_PAGE" class="sapUiFioriObjectPage">
+		<content>
+			<f:SimpleForm editable="false">
+				<f:content>
+					<sap.ui.core:Title id="SO_CartHeader" text="{i18n>DELIVERY_SCHEDULES}"/>
+					<Label text="{i18n>CUSTOMER}">
+						<layoutData>
+							<sap.ui.layout:ResponsiveFlowLayoutData minWidth="192" weight="3"></sap.ui.layout:ResponsiveFlowLayoutData>
+						</layoutData>
+					</Label>
+					<Text text="{soc_cart>/CustomerName}" maxLines="0">
+						<layoutData>
+							<sap.ui.layout:ResponsiveFlowLayoutData weight="5"></sap.ui.layout:ResponsiveFlowLayoutData>
+						</layoutData>
+					</Text>
+					<Label text="Cidade">
+						<layoutData>
+							<sap.ui.layout:ResponsiveFlowLayoutData minWidth="192" weight="3"></sap.ui.layout:ResponsiveFlowLayoutData>
+						</layoutData>
+					</Label>
+					<Text text="{soc_cart>/Zcidade}" maxLines="0">
+						<layoutData>
+							<sap.ui.layout:ResponsiveFlowLayoutData weight="5"></sap.ui.layout:ResponsiveFlowLayoutData>
+						</layoutData>
+					</Text>
+					<Label text="Bairro">
+						<layoutData>
+							<sap.ui.layout:ResponsiveFlowLayoutData minWidth="192" weight="3"></sap.ui.layout:ResponsiveFlowLayoutData>
+						</layoutData>
+					</Label>
+					<Text text="{soc_cart>/Zbairro}" maxLines="0">
+						<layoutData>
+							<sap.ui.layout:ResponsiveFlowLayoutData weight="5"></sap.ui.layout:ResponsiveFlowLayoutData>
+						</layoutData>
+					</Text>
+					<Label text="Tipo de Frete">
+						<layoutData>
+							<sap.ui.layout:ResponsiveFlowLayoutData minWidth="192" weight="3"></sap.ui.layout:ResponsiveFlowLayoutData>
+						</layoutData>
+					</Label>
+					<ComboBox id="idCBTipoFrete" items="{ path: '/ZtipofreteSet', sorter: { path: 'descricao' } }" width="250em" change="onModalSelected">
+						<sap.ui.core:Item key="{codigo}" text="{descricao}"/>
+					</ComboBox>
+					<Label text="Tipo de Entrega">
+						<layoutData>
+							<sap.ui.layout:ResponsiveFlowLayoutData minWidth="192" weight="3"></sap.ui.layout:ResponsiveFlowLayoutData>
+						</layoutData>
+					</Label>
+					<ComboBox id="idCBTipoEntrega" items="{ path: '/ZtipoentregaSet', sorter: { path: 'descricao' } }" width="250em" change="onModalSelected">
+						<sap.ui.core:Item key="{codigo}" text="{descricao}"/>
+					</ComboBox>
+					<Label text="">
+						<layoutData>
+							<sap.ui.layout:ResponsiveFlowLayoutData minWidth="10" weight="3"></sap.ui.layout:ResponsiveFlowLayoutData>
+						</layoutData>
+					</Label>
+					<CheckBox id="idCBBasePallet" text="O tipo de entrega utiliza Base Pallet?" selected="false">
+					</CheckBox>
+					<!--<Label class="soc-table-label-elem-align" text="{i18n>REQUESTED_DELIVERY}">
+						<layoutData>
+							<sap.ui.layout:ResponsiveFlowLayoutData minWidth="192" weight="3"></sap.ui.layout:ResponsiveFlowLayoutData>
+						</layoutData>
+					</Label>
+					<ui:DatePicker id="SOC_CART_SINGLE_RDD"
+						value="{path : 'soc_cart>/formatSingleRdd', type:'sap.ca.ui.model.type.Date', formatOptions: {sytle:'medium'}}" change="setUniformSingleRdd"
+						width="120em">
+						<ui:layoutData>
+							<sap.ui.layout:ResponsiveFlowLayoutData weight="5"></sap.ui.layout:ResponsiveFlowLayoutData>
+						</ui:layoutData>
+					</ui:DatePicker>-->
+				</f:content>
+			</f:SimpleForm>
+			<Table id="SOC_CART_LIST" inset="true"
+				headerText="{parts:[{path:'i18n>SO_ITM_ORD_ITMS'},{path:'soc_cart>/itemCount'}], formatter:'zcus.sd.pn.salesorder.create.util.Formatter.getTextPar'}"
+				items="{soc_cart>/oShoppingCartItems}">
+				<items>
+					<ColumnListItem unread="true" counter="0">
+						<cells>
+							<Image id="SOC_PRODUCT_IMG" src="{soc_cart>ImgUrl}" width="4em" densityAware="false"></Image>
+							<Text id="SOC_PRODUCT_NO" text="{soc_cart>ProductEan}"></Text>
+							<Text text="{soc_cart>ProductID}"></Text>
+							<ObjectIdentifier id="SOC_DESCRIPTION" title="{soc_cart>ProductDesc}" badgeNotes="false" badgePeople="false" badgeAttachments="false"></ObjectIdentifier>
+							<sap.ui.layout:ResponsiveFlowLayout id="idTeste">
+								<sap.ui.layout:content>
+									<Input id="SOC_QTY" liveChange="onNumberEnter" value="{path:'soc_cart>qty', type:'sap.ui.model.type.Integer'}" maxLength="10"></Input>
+									<Label id="SOC_UOM" class="soc-quantity-align" text="{soc_cart>UnitofMeasureTxt}"></Label>
+								</sap.ui.layout:content>
+							</sap.ui.layout:ResponsiveFlowLayout>
+							<sap.ui.layout:ResponsiveFlowLayout>
+								<sap.ui.layout:content>
+									<Input id="SOC_CART_ZP80" liveChange="onPercentEnter" value="{path:'soc_cart>Zp80', type:'sap.ui.model.type.String'}" maxLength="6"></Input>
+									<Label id="SOC_CART_ZP80_LABEL" class="soc-quantity-align" text="%"></Label>
+								</sap.ui.layout:content>
+							</sap.ui.layout:ResponsiveFlowLayout>
+							<Text text="{soc_cart>Zpeso}"></Text>
+							<Text text="{soc_cart>ZpesoB}"></Text>
+							<Text text="{soc_cart>Zqtdeemb} UN"></Text>
+							<!--<Text text="{soc_cart>Zpallet}"></Text>-->
+							<!--<ui:DatePicker id="SOC_CART_RDD" value="{path : 'soc_cart>formatRDD', type:'sap.ca.ui.model.type.Date', formatOptions: {sytle:'medium'}}"
+								change="setUniformRDD" width="10em"></ui:DatePicker>-->
+							<!-- Extension point for table column value let you add new field in table -->
+							<!-- fernaj10 -->
+							<!--<sap.ui.layout:ResponsiveFlowLayout>
+								<sap.ui.layout:content>
+										<Input id="SOC_CART_KBETR" liveChange="onPercentEnter" value="{path:'soc_cart>Kbetr', type:'sap.ui.model.type.String'}" maxLength="5"></Input>
+										<Label id="SOC_PERCENT" class="soc-quantity-align" text="%"></Label>
+								</sap.ui.layout:content>
+							</sap.ui.layout:ResponsiveFlowLayout>-->
+							<sap.ui.core:ExtensionPoint name="extSOCCartTableColumnValue"/>
+							<Button id="SOC_REMOVE" tap="removeItem" type="Transparent" icon="sap-icon://sys-cancel" class="sapMLIBSelectD"></Button>
+						</cells>
+					</ColumnListItem>
+				</items>
+				<columns>
+					<Column hAlign="Left" width="5rem" demandPopin="true"></Column>
+					<Column hAlign="Left" minScreenWidth="tablet" width="22%" demandPopin="true">
+						<header>
+							<Text text="EAN" textAlign="Left" width="100%" maxLines="0"></Text>
+						</header>
+					</Column>
+					<Column hAlign="Left" minScreenWidth="tablet" width="20%" demandPopin="true">
+						<header>
+							<Text text="Código Material" textAlign="Left" width="100%" maxLines="0"></Text>
+						</header>
+					</Column>
+					<Column hAlign="Left" minScreenWidth="tablet" width="60%" demandPopin="true">
+						<header>
+							<Text text="{i18n>DESCRIPTION}" textAlign="Left" width="100%" maxLines="0"></Text>
+						</header>
+					</Column>
+					<Column hAlign="Left" minScreenWidth="tablet" width="20%" demandPopin="true">
+						<header>
+							<Text text="{i18n>QUANTITY}" textAlign="Left" width="100%" maxLines="0"></Text>
+						</header>
+					</Column>
+					<Column hAlign="Left" minScreenWidth="tablet" width="20%" demandPopin="true">
+						<header>
+							<Text text="Desconto (%)" textAlign="Left" width="100%" maxLines="0"></Text>
+						</header>
+					</Column>
+					<Column hAlign="Left" minScreenWidth="tablet" width="20%" demandPopin="true">
+						<header>
+							<Text text="Peso Liq. (Kg)" textAlign="Left" width="100%" maxLines="0"></Text>
+						</header>
+					</Column>
+					<Column hAlign="Left" minScreenWidth="tablet" width="20%" demandPopin="true">
+						<header>
+							<Text text="Peso Bruto (Kg)" textAlign="Left" width="100%" maxLines="0"></Text>
+						</header>
+					</Column>
+					<Column hAlign="Left" minScreenWidth="tablet" width="20%" demandPopin="true">
+						<header>
+							<Text text="Quantidade Embalagem" textAlign="Left" width="100%" maxLines="0"></Text>
+						</header>
+					</Column>
+					<!--<Column hAlign="Left" minScreenWidth="tablet" width="20%" demandPopin="true">
+						<header>
+							<Text text="Palete" textAlign="Left" width="100%" maxLines="0"></Text>
+						</header>
+					</Column>-->
+					<!--<Column hAlign="Left" minScreenWidth="400px" width="20%" demandPopin="true">
+						<header>
+							<Text text="{i18n>REQUESTED_DELIVERY}" textAlign="Left" width="100%" maxLines="0"></Text>
+						</header>
+					</Column>-->
+					<!-- Extension point for table column header let you add new column name in table-->
+					<!-- fernaj10 -->
+					<!--<Column hAlign="Left" minScreenWidth="400px" width="20%" demandPopin="true">
+						<header>
+							<Text text="{i18n>OFF_VALUE}" textAlign="Left" width="100%" maxLines="0"></Text>
+						</header>
+					</Column>-->
+					<sap.ui.core:ExtensionPoint name="extSOCCartTableColumnHeader"/>
+					<Column hAlign="Right" width="3rem" demandPopin="true"></Column>
+				</columns>
+			</Table>
+		</content>
+	</Page>
+</sap.ui.core:View>

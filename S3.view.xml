@@ -1,0 +1,119 @@
+<!--
+
+    Copyright (C) 2009-2014 SAP SE or an SAP affiliate company. All rights reserved
+
+-->
+<core:View xmlns:core="sap.ui.core" xmlns:sap.ui.core.mvc="sap.ui.core.mvc" xmlns="sap.m" controllerName="zcus.sd.pn.salesorder.create.view.S3">
+	<Page id="SalesOrderDetail" title="{i18n>ORDER_DETAIL}" class="sapUiFioriObjectPage">
+		<headerContent>
+			<!--
+ 			<Button id="excelButton2" icon="sap-icon://upload" press="onPressExcelButton" ariaLabelledBy="actionButtonLabel" text="Upload Excel" enabled="false"/>
+		    -->
+			<Button id="CART_BUTTON" icon="{img>/cartIcon}" tap="_goToCart" text="{soc_cart>/itemCount}"/>
+		</headerContent>
+		<content>
+		<!--	<ObjectHeader xmlns="sap.m" xmlns:sap.ui.core="sap.ui.core" id="SO_ObjectHeader"
+				title="{parts:[{path:'i18n>SO'},{path:'SalesOrderNumber'}], formatter:'zcus.sd.pn.salesorder.create.util.Formatter.getTextPar'}"
+				number="{path : 'TotalAmount', formatter:'sap.ca.ui.model.format.AmountFormat.FormatAmountStandard'}" numberUnit="{Currency}"
+				introActive="false" titleActive="false" iconActive="false">-->
+				<ObjectHeader xmlns="sap.m" xmlns:sap.ui.core="sap.ui.core" id="SO_ObjectHeader"
+				title="{parts:[{path:'i18n>SO'},{path:'SalesOrderNumber'}], formatter:'zcus.sd.pn.salesorder.create.util.Formatter.getTextPar'}"
+				number="{path : 'LocalDetails>/Zr00', formatter:'sap.ca.ui.model.format.AmountFormat.FormatAmountStandard'}" numberUnit="Reais"
+				introActive="false" titleActive="false" iconActive="false">
+				<attributes>
+					<ObjectAttribute text="{i18n>PURCHASE_ORDER}: {path:'LocalDetails>/PO'}" active="false"></ObjectAttribute>
+					<!--<ObjectAttribute text="{path:'LocalDetails>/CustomerName', formatter:'zcus.sd.pn.salesorder.create.util.Formatter.formatSOTo'}" active="false"></ObjectAttribute>
+					-->
+					<!--<ObjectAttribute text="Bairro: {path:'LocalDetails>/FormattedAddress4'}" active="false"></ObjectAttribute>
+					<ObjectAttribute text="Cidade: {path:'LocalDetails>/FormattedAddress5'}" active="false"></ObjectAttribute>-->
+					<ObjectAttribute text="Bairro: {path:'soc_cart>/Zbairro'}" active="false"></ObjectAttribute>
+					<ObjectAttribute text="Cidade: {path:'soc_cart>/Zcidade'}" active="false"></ObjectAttribute>
+					
+					<!--<ObjectAttribute
+						text="{parts:[{path:'LocalDetails>/FormattedAddress2'},{path:'LocalDetails>/FormattedAddress3'},{path:'LocalDetails>/FormattedAddress4'},{path:'LocalDetails>/FormattedAddress5'},{path:'LocalDetails>/FormattedAddress6'},{path:'LocalDetails>/FormattedAddress7'},{path:'LocalDetails>/FormattedAddress8'},{path:'LocalDetails>/FormattedAddress9'}], formatter:'zcus.sd.pn.salesorder.create.util.Formatter.formatAddress'}"
+						id="address" active="false"></ObjectAttribute>-->
+					<!-- Extension point for Sales Order Details page let you add new field in sales order detail page -->
+					<sap.ui.core:ExtensionPoint name="extSalesOrderDetail"/>
+				</attributes>
+				<statuses>
+					<ObjectStatus
+						text="{path: 'OrderDate', type:'sap.ca.ui.model.type.Date', formatOptions:{source:{pattern:'yyyyMMdd'},style:'medium'}, formatter:'zcus.sd.pn.salesorder.create.util.Formatter.zformatOrderDate'}"></ObjectStatus>
+					<ObjectStatus id="requested" text="{path: 'RequestedDate', type:'sap.ca.ui.model.type.Date', formatOptions:{source:{pattern:'yyyyMMdd'},style:'medium'}, formatter:'zcus.sd.pn.salesorder.create.util.Formatter.formatRequestDate'}"></ObjectStatus>
+					<ObjectStatus id="requested_fat2" text="{path: 'LocalDetails>/ZnfDate', type:'sap.ca.ui.model.type.Date', formatOptions:{source:{pattern:'yyyyMMdd'},style:'medium'}, formatter:'zcus.sd.pn.salesorder.create.util.Formatter.zformatRequestDate'}"></ObjectStatus>
+					<!--<ObjectStatus id="requested_fat" text="Data da faturamento: {path: 'LocalDetails>/ZnfDate'}"></ObjectStatus>-->
+					<ObjectStatus id="nfnum" text="Número NF: {path:'LocalDetails>/ZnfNum'}"></ObjectStatus>
+					<ObjectStatus id="lsvFat" text="GSV Faturado: {path:'LocalDetails>/Zr00Fat', formatter:'sap.ca.ui.model.format.AmountFormat.FormatAmountStandard'} BRL"></ObjectStatus>
+					<ObjectStatus id="lsvRem" text="GSV Alocado: {path:'LocalDetails>/Zr00Rem', formatter:'sap.ca.ui.model.format.AmountFormat.FormatAmountStandard'} BRL"></ObjectStatus>
+					<ObjectStatus id="nfFat" text="NF Faturado: {path:'LocalDetails>/ZipiFat', formatter:'sap.ca.ui.model.format.AmountFormat.FormatAmountStandard'} BRL"></ObjectStatus>
+					<ObjectStatus id="status" text="Status: {path: 'ZorderStatus'}" state="{path: 'ZcolorStatus'}" icon="sap-icon://{path: 'ZsatusIcon'}"></ObjectStatus>
+				</statuses>
+			</ObjectHeader>
+			<!--<core:Icon
+				src="sap-icon://unlocked"
+				class="size1"
+				color="{path: 'ZcolorStatus1'}">
+				<core:layoutData>
+					<FlexItemData growFactor="5" />
+				</core:layoutData>
+			</core:Icon>
+			<Label text="{path: 'ZtextStatus1'}"></Label>
+			
+			<core:Icon
+				src="sap-icon://bullet-text"
+				class="size1"
+				color="#031E48">
+				<core:layoutData>
+					<FlexItemData growFactor="5" />
+				</core:layoutData>
+			</core:Icon>
+			<Label text="2"></Label>
+			<IconTabBar id="idIconTabBar" 
+			class="sapUiResponsiveContentPadding" >
+				<items>
+					<IconTab icon="sap-icon://begin" iconColor="Positive" count="1" text="Ok" key="Ok"/>
+					<IconTabSeparator/>
+					<IconTab icon="sap-icon://inventory" iconColor="Negative" count="2" text="Overweight" key="Overweight"/>
+				</items>
+			</IconTabBar>-->
+			
+			<core:Icon src="sap-icon://settings" class="size1" color="{path: 'ZcolorStatus3'}">
+				<core:layoutData>
+					<FlexItemData growFactor="5"/>
+				</core:layoutData>
+			</core:Icon>
+			<Label text="{path: 'ZtextStatus3'}"></Label>
+			
+			<core:Icon src="sap-icon://shipping-status" class="size1" color="{path: 'ZcolorStatus4'}">
+				<core:layoutData>
+					<FlexItemData growFactor="5"/>
+				</core:layoutData>
+			</core:Icon>
+			<Label text="{path: 'ZtextStatus4'}"></Label>
+			
+			<core:Icon src="sap-icon://receipt" class="size1" color="{path: 'ZcolorStatus5'}">
+				<core:layoutData>
+					<FlexItemData growFactor="5"/>
+				</core:layoutData>
+			</core:Icon>
+			<Label text="{path: 'ZtextStatus5'}"></Label>
+			
+			<HBox>
+				<Label class="icontext1" text="Geral"></Label>
+				<Label class="icontext2" text="Remessa"></Label>
+				<Label class="icontext3" text="Fatura"></Label>
+			</HBox>
+			
+			<sap.ui.core.mvc:XMLView id="soItemDetail" viewName="zcus.sd.pn.salesorder.create.view.SOItemDetail"></sap.ui.core.mvc:XMLView>
+		</content>
+		<footer id="footer">
+			<Bar>
+				<contentRight>
+					<!--
+					<Button id="SO_AddToCart" tap="_addProductToCart" text="{i18n>ADD_TO_CART}" type="Emphasized"></Button>
+					<Button id="SO_QuickCheckout" tap="_quickCheckout" text="{i18n>CHECKOUT}"></Button>
+					-->
+				</contentRight>
+			</Bar>
+		</footer>
+	</Page>
+</core:View>
